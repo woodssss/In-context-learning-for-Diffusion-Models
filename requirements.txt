@@ -1,0 +1,13 @@
+numpy
+scipy
+matplotlib
+tqdm
+torch
+torchvision
+jax
+jax-cfd
+xarray
+seaborn
+POT
+jupyter
+nbformat
