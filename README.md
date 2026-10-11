@@ -2,7 +2,11 @@
 
 This project provides code for the paper: 
 [Transformer-based In-Context Score Operator Learning for Diffusion Models].
-We currently release the demo code Navier-Stokes equation
+The repository contains:
+
+- **Navier–Stokes demo** (Sections 1–5): data generation, training of ICL-DM and the comparison models, and inference. This is the only demo released so far.
+- **Lean 4 formalization** ([`Lean4_formulation/`](Lean4_formulation)): a machine-checked proof of the paper's generalization error bound (Section 6).
+
 ## 1. Requirements
 NS data generation uses JAX-CFD. Training and inference use PyTorch.
 
@@ -93,3 +97,28 @@ python IND_NS.py \
 Checkpoint names are constructed directly from these arguments. The dataset,
 prompt count, prompt-set count, and epoch therefore need to match training.
 
+## 6. Lean 4 formalization of the generalization bound
+
+The main generalization theorem of the paper, an expected excess-risk bound for
+the in-context score estimator, is formalized and machine-checked in
+[Lean 4](https://lean-lang.org/) with
+[mathlib](https://github.com/leanprover-community/mathlib4). The code is in
+[`Lean4_formulation/`](Lean4_formulation).
+
+- **Main theorem:** `GeneralizationCheck.main_generalization_error_inequality` in [`MainInequality.lean`](Lean4_formulation/ICLGeneralization/MainInequality.lean).
+- **Complete proofs:** no `sorry` or `admit`, and no axioms beyond Lean's standard `propext`, `Classical.choice`, and `Quot.sound`.
+- **Paper-to-Lean map:** each lemma and proposition of the paper is linked to its Lean statement in the [Lean README](Lean4_formulation/README.md#correspondence).
+- **Assumptions:** the exact premises are listed in [`proof-scope.md`](Lean4_formulation/docs/proof-scope.md).
+
+To check the proofs yourself, install [elan](https://github.com/leanprover/elan),
+then run:
+
+```bash
+cd Lean4_formulation
+lake exe cache get   # download prebuilt mathlib
+bash check.sh        # build and audit every proof
+```
+
+A successful run ends with `PASS`. GitHub Actions runs the same check on every
+push. The full theorem statement and verification details are in
+[`Lean4_formulation/README.md`](Lean4_formulation/README.md).
