@@ -1,0 +1,43 @@
+name: Lean proof audit
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Locate the proof project
+        id: project
+        shell: bash
+        run: |
+          if [[ -f lean-toolchain && -f check.sh ]]; then
+            echo "path=." >> "$GITHUB_OUTPUT"
+          elif [[ -f lean_proof_github/lean-toolchain && -f lean_proof_github/check.sh ]]; then
+            echo "path=lean_proof_github" >> "$GITHUB_OUTPUT"
+          else
+            echo "Cannot locate the Lean proof project." >&2
+            exit 1
+          fi
+      - name: Install the pinned compiler and fetch mathlib cache
+        uses: leanprover/lean-action@38fbc41a8c28c4cbaec22d7f7de508ec2e7c0dd9
+        with:
+          lake-package-directory: ${{ steps.project.outputs.path }}
+          auto-config: false
+          build: false
+          use-github-cache: false
+          use-mathlib-cache: true
+      - name: Check every proof and audit dependencies
+        working-directory: ${{ steps.project.outputs.path }}
+        run: bash check.sh
+
