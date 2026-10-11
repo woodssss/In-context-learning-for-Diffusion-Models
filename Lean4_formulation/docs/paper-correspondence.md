@@ -29,19 +29,19 @@ For Lemma 3, the formal proof first derives zero signed expectation for a fixed 
 
 For the scalar parameter count,
 
-$$
+```math
 P_T=w(D+1)+L_T\{3m_Tw^2+L_{\mathrm{FFN}}(w^2+w)\}.
-$$
+```
 
 The biases are included. Under $w=2D+6$, $L_T=5$, $L_{\mathrm{FFN}}=6$, and $m_T=n$, Lean proves $DP_T\le3136nD^3$.
 
 The inequality assembly uses the definitions in [MainInequalityAlgebra.lean](../ICLGeneralization/MainInequalityAlgebra.lean):
 
-$$
+```math
 C_1=\big(\operatorname{statisticalRateConstant}(41943040,b,R)+\sqrt3\big)(R+b)^2,
 \qquad
 C_2=32e\,2^db^2A_{\mathcal M}+4b^2+7(R+b)^2.
-$$
+```
 
 `main_weight_budget_cutoff` in [MainTheorem.lean](../ICLGeneralization/MainTheorem.lean) proves the coefficient order $D^8n^{(2d+20)/(d+6)}b^8R^4$.
 

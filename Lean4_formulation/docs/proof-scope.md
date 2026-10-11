@@ -17,17 +17,17 @@ The realization uses five Transformer blocks, at most $n$ heads per block, $n+1$
 
 The diffusion schedules and the time-modulation templates are prescribed. For each Q/K/V map, only its base matrix is a free parameter:
 
-$$
+```math
 A_\theta(t)=A_\theta^{(0)}+\alpha(t)A^{(\alpha)}+\sigma(t)^{-1}A^{(\sigma)}.
-$$
+```
 
 The base matrices, embedding, decoder, and all FFN matrices and biases are covered by the coefficient grid. The fixed templates are not additional trainable coefficients. Auxiliary modules with three independently trainable schedule groups provide stability bounds for a larger family; they do not change the parameter count used in the main theorem.
 
 The mean output is bounded by $R$ on the full sampled-input domain. The score is
 
-$$
+```math
 T_\theta(y,t)=-\frac{y}{\sigma(t)^2}+\frac{\alpha(t)}{\sigma(t)^2}G_\theta(y,t).
-$$
+```
 
 It is the mean and the DSM residual-square loss that are bounded. No global bound on the score over all of $\mathbb R^D$ is claimed. An explicit sufficient coefficient budget is $41943040D^8n^2b^8R^4/s_0^8$.
 
@@ -39,15 +39,15 @@ It is the mean and the DSM residual-square loss that are bounded. No global boun
 
 The training sample retains the variables required to evaluate the loss, including the clean query and noise. The network input itself consists only of the prompt, noisy query, and time. The test sample is independent of training.
 
-The full Gaussian law is used in training and population risks. The event $\|\varepsilon\|\le C_\delta$ restricts the input region only for exact kernel realization and loss covering. Its complement is controlled using a proved Gaussian tail bound.
+The full Gaussian law is used in training and population risks. The event $`\|\varepsilon\|\le C_\delta`$ restricts the input region only for exact kernel realization and loss covering. Its complement is controlled using a proved Gaussian tail bound.
 
 For $y=\alpha(t)x+\sigma(t)\varepsilon$, cancellation gives the pointwise loss bound
 
-$$
+```math
 \left\|T_\theta(y,t)+\frac{\varepsilon}{\sigma(t)}\right\|^2
 =\frac{\alpha(t)^2}{\sigma(t)^4}\|G_\theta(y,t)-x\|^2
 \le M_\delta:=\frac{D(R+b)^2}{s_0^4}.
-$$
+```
 
 The formal input is an ordered iid prompt tuple. A claim that every network in the hypothesis class factors through an unordered empirical measure requires a separate permutation-invariance argument and is not supplied here.
 

@@ -14,12 +14,12 @@ The development establishes the following mathematical results:
 
 The main theorem is stated and proved in [MainInequality.lean](ICLGeneralization/MainInequality.lean) as `GeneralizationCheck.main_generalization_error_inequality`. With the attained cutoff $s_0=\sigma(\delta)=n^{-1/(d+6)}$, its conclusion is
 
-$$
+```math
 \mathbb E_{\mathfrak S}\big[\mathcal L_n(T_{\theta^*;\mathfrak S})-\mathcal L(T^*)\big]
 \le C_1D^{5/2}n^{1/2+4/(d+6)}\sqrt{\log(n^2DKJN_T)}
 \left(\frac1{\sqrt K}+\frac1{\sqrt{KJ}}+\frac1{\sqrt{KJN_T}}\right)
 +C_2D n^{-2/(d+6)}.
-$$
+```
 
 Here $n$ is the context size, $D$ the ambient dimension, $d$ the covering exponent, $K$ the number of tasks, $J$ the episodes per task, and $N_T$ the diffusion samples per episode. The constant $C_1$ depends on $b,R$ and the fixed architecture and budget constants; $C_2$ depends on $b,R,d,A_{\mathcal M}$. Both are independent of the sample sizes, ambient dimension, and cutoff.
 
