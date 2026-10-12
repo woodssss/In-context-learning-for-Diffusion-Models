@@ -1,7 +1,7 @@
-# In-Context Score Operator Learning for Diffusion Models Demo
+# Transformer-based In-Context Score Operator Learning for Diffusion Models
 
 This project provides code for the paper: 
-[Transformer-based In-Context Score Operator Learning for Diffusion Models].
+[Transformer-based In-Context Score Operator Learning for Diffusion Models](https://arxiv.org/pdf/2610.13690).
 The repository contains:
 
 - **Navier–Stokes demo** (Sections 1–5): data generation, training of ICL-DM and the comparison models, and inference. This is the only demo released so far.
