@@ -1,6 +1,6 @@
 # Lean proofs for in-context diffusion generalization
 
-This repository contains a machine-checked Lean 4 formalization of the generalization analysis for in-context diffusion score matching, built on [mathlib](https://github.com/leanprover-community/mathlib4). It accompanies the theoretical results in `main_arxiv_v1.tex`.
+This repository contains a machine-checked Lean 4 formalization of the generalization analysis for in-context diffusion score matching, built on [mathlib](https://github.com/leanprover-community/mathlib4). It accompanies the theoretical results in Transformer-based In-Context Score Operator Learning for Diffusion Models.
 
 ## What is proved
 
